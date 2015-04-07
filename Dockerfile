@@ -19,10 +19,10 @@ RUN (echo "require(['base/js/namespace'], function (IPython) {" && \
      > /root/.ipython/profile_default/static/custom/custom.js
 
 RUN (echo "c = get_config()" && \
-     echo "headers = {'X-Frame-Options': 'ALLOWALL'}" && \
+     echo "headers = {'Content-Security-Policy': 'frame-ancestors *'}" && \
      echo "c.NotebookApp.allow_origin = '*'" && \
      echo "c.NotebookApp.allow_credentials = True" && \
-     echo "c.NotebookApp.webapp_settings = {'headers': headers}" && \
+     echo "c.NotebookApp.tornado_settings = {'headers': headers}" && \
      echo "from IPython.lib import passwd" && \
      echo "import os" && \
      echo "c.NotebookApp.password = passwd(os.environ.get('PASSWORD', 'jupyter'))") \
