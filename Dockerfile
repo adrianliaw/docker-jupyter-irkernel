@@ -5,8 +5,8 @@ MAINTAINER Adrian Liaw (Wei-Han Liaw) <adrianliaw2000@gmail.com>
 ADD install.R /
 
 RUN apt-get update && \
-    apt-get install -y python3 python3-pip && \
-    pip3 install ipython pyzmq jinja2 tornado jsonschema
+    apt-get install -y python python-pip && \
+    pip install ipython[notebook]
 
 RUN apt-get install -y libzmq3-dev libcurl4-openssl-dev && \
     Rscript install.R && \
