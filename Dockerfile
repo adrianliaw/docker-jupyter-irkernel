@@ -23,6 +23,8 @@ RUN (echo "c = get_config()" && \
      echo "c.NotebookApp.allow_origin = '*'" && \
      echo "c.NotebookApp.allow_credentials = True" && \
      echo "c.NotebookApp.tornado_settings = {'headers': headers}" && \
+     echo "c.NotebookApp.ip = '0.0.0.0'" && \
+     echo "c.NotebookApp.open_browser = False" && \
      echo "from IPython.lib import passwd" && \
      echo "import os" && \
      echo "c.NotebookApp.password = passwd(os.environ.get('PASSWORD', 'jupyter'))") \
@@ -35,4 +37,4 @@ WORKDIR $DIR
 
 EXPOSE 8888
 
-CMD ipython notebook --ip 0.0.0.0 --no-browser
+CMD ipython notebook
