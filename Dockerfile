@@ -3,7 +3,8 @@ FROM r-base:latest
 MAINTAINER Adrian Liaw (Wei-Han Liaw) <adrianliaw2000@gmail.com>
 
 RUN apt-get update && \
-    apt-get install -y python python-pip && \
+    apt-get install -y python-dev curl gcc g++ && \
+    curl https://bootstrap.pypa.io/get-pip.py | python && \
     pip install ipython[notebook]
 
 RUN apt-get install -y libzmq3-dev libcurl4-openssl-dev && \
