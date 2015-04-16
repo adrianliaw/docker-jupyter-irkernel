@@ -12,7 +12,7 @@ RUN apt-get install -y libzmq3-dev libcurl4-openssl-dev && \
      echo "install.packages('RCurl')" && \
      echo "library(devtools)" && \
      echo "install_github('armstrtw/rzmq')" && \
-     echo "install_github('IRkernel/IRdisplay')" && \
+     echo "install_github('IRkernel/IRdisplay', ref='multi-image')" && \
      echo "install_github('IRkernel/IRkernel')" && \
      echo "IRkernel::installspec()" ) \
     | Rscript -e "source(file('stdin'))" && \
