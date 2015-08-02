@@ -8,13 +8,8 @@ RUN apt-get update && \
     pip install ipython[notebook]
 
 RUN apt-get install -y libzmq3-dev libcurl4-openssl-dev && \
-    (echo "install.packages('devtools')" && \
-     echo "install.packages('RCurl')" && \
-     echo "library(devtools)" && \
-     echo "install_github('armstrtw/rzmq')" && \
-     echo "install_github('IRkernel/repr')" && \
-     echo "install_github('IRkernel/IRdisplay', ref='multi-image')" && \
-     echo "install_github('IRkernel/IRkernel')" && \
+    (echo "install.packages(c('rzmq','repr','IRkernel','IRdisplay')," && \
+     echo "    repos = c('http://irkernel.github.io/', getOption('repos')))" && \
      echo "IRkernel::installspec()" ) \
     | Rscript -e "source(file('stdin'))" && \
     mkdir workspace workspace/notebooks workspace/data
