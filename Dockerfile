@@ -12,12 +12,13 @@ RUN apt-get install -y libzmq3-dev libcurl4-openssl-dev && \
      echo "    repos = c('http://irkernel.github.io/', getOption('repos')))" && \
      echo "IRkernel::installspec()" ) \
     | Rscript -e "source(file('stdin'))" && \
-    mkdir workspace workspace/notebooks workspace/data
+    mkdir -p workspace/notebooks workspace/data /root/.ipython/profile_default/static/custom
 
 RUN (echo "require(['base/js/namespace'], function (IPython) {" && \
      echo "  IPython._target = '_self';" && \
      echo "});") \
-     > /root/.ipython/profile_default/static/custom/custom.js
+     > /root/.ipython/profile_default/static/custom/custom.js && \
+    touch /root/.ipython/profile_default/static/custom/custom.css
 
 RUN (echo "c = get_config()" && \
      echo "headers = {'Content-Security-Policy': 'frame-ancestors *'}" && \
