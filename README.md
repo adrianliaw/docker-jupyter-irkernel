@@ -2,7 +2,6 @@
 `docker pull adrianliaw/jupyter-irkernel`
 
 ## Usage:
-`docker run -p <outer-port>:8888 -e PASSWORD=<password> adrianliaw/jupyter-irkernel`  
-(default password is "jupyter")
+`docker run -p <outer-port>:8888 adrianliaw/jupyter-irkernel`  
 
 Then you can open a notebook with R kernel!
