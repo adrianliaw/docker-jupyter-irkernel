@@ -10,28 +10,15 @@ RUN apt-get update && \
 RUN apt-get install -y libzmq3-dev libcurl4-openssl-dev && \
     (echo "install.packages(c('rzmq','repr','IRkernel','IRdisplay')," && \
      echo "    repos = c('http://irkernel.github.io/', getOption('repos')))" && \
-     echo "IRkernel::installspec()" ) \
+     echo "IRkernel::installspec()") \
     | Rscript -e "source(file('stdin'))" && \
-    mkdir workspace workspace/notebooks workspace/data
-
-RUN (echo "require(['base/js/namespace'], function (IPython) {" && \
-     echo "  IPython._target = '_self';" && \
-     echo "});") \
-     > /root/.ipython/profile_default/static/custom/custom.js
+    mkdir -p workspace/notebooks workspace/data /root/.ipython/profile_default
 
 RUN (echo "c = get_config()" && \
-     echo "headers = {'Content-Security-Policy': 'frame-ancestors *'}" && \
-     echo "c.NotebookApp.allow_origin = '*'" && \
-     echo "c.NotebookApp.allow_credentials = True" && \
-     echo "c.NotebookApp.tornado_settings = {'headers': headers}" && \
      echo "c.NotebookApp.ip = '0.0.0.0'" && \
-     echo "c.NotebookApp.open_browser = False" && \
-     echo "from IPython.lib import passwd" && \
-     echo "import os" && \
-     echo "c.NotebookApp.password = passwd(os.environ.get('PASSWORD', 'jupyter'))") \
-     > /root/.ipython/profile_default/ipython_notebook_config.py
+     echo "c.NotebookApp.open_browser = False") \
+    > /root/.ipython/profile_default/ipython_notebook_config.py
 
-ENV PASSWORD jupyter
 ENV DIR /workspace
 
 WORKDIR $DIR
